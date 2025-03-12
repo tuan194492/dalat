@@ -17,7 +17,7 @@
       justify-content: center;
       height: 100vh;
       font-family: Arial, sans-serif;
-      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://media.vneconomy.vn/images/upload/2023/07/06/1688465738-grasp-the-rainy-season-travel-tips-to-da-lat.jpg') no-repeat center center fixed;
+      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://media-cdn.tripadvisor.com/media/photo-s/12/a7/83/2f/hinh-nh-da-n-ng-nhin.jpg') no-repeat center center fixed;
       background-size: cover;
       color: #ffffff;
     }
@@ -89,7 +89,7 @@
 </head>
 <body>
   <div class="countdown-container">
-    <h1>Countdown to Đà Lạt Trip</h1>
+    <h1>Countdown to Huế - Đà Nẵng Trip</h1>
     <div class="countdown">
       <div class="time-block"><span id="days">0</span><div class="label">Days</div></div>
       <div class="time-block"><span id="hours">0</span><div class="label">Hours</div></div>
@@ -100,7 +100,7 @@
 
   <script>
     function countdown() {
-      const targetDate = new Date("2024-12-25T00:00:00").getTime();
+      const targetDate = new Date("2024-12-24T03:00:00").getTime();
       const now = new Date().getTime();
       const difference = targetDate - now;
 
@@ -116,7 +116,7 @@
 
       if (difference < 0) {
         clearInterval(timer);
-        document.querySelector(".countdown").innerHTML = "Enjoy your trip to Đà Lạt!";
+        document.querySelector(".countdown").innerHTML = "Enjoy your trip to Huế - Đà Nẵng!";
       }
     }
 
