@@ -1,139 +1,346 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Countdown to Huế - Đà Nẵng Trip</title>
-  <style>
-    /* Basic reset and body styling */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://sakos.vn/wp-content/uploads/2023/04/znews-photo.zingcdn.me-uploaded-lce_mdlwc-2022_12_28-_14_zing-1.jpg') no-repeat center center fixed;
-      background-size: cover;
-      color: #ffffff;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    /* Countdown container styling */
-    .countdown-container {
-      text-align: center;
-      background: rgba(0, 0, 0, 0.7);
-      padding: 30px 20px;
-      border-radius: 15px;
-      backdrop-filter: blur(8px);
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    }
+<title>Nha Trang Trip Countdown</title>
 
-    /* Title styling */
-    h1 {
-      font-size: 2em;
-      color: #ffffff;
-      margin-bottom: 20px;
-    }
+<style>
 
-    /* Countdown styling */
-    .countdown {
-      display: flex;
-      gap: 15px;
-      font-size: 1.5em;
-      justify-content: center;
-    }
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, Helvetica, sans-serif;
+}
 
-    /* Individual time block styling */
-    .countdown .time-block {
-      position: relative;
-      width: 140px;
-      height: 100px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      font-size: 2em;
-      font-weight: bold;
-      color: #ffdd59;
-      background: linear-gradient(135deg, #ff5f6d, #ffc371);
-      border-radius: 10px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-      overflow: hidden;
-    }
+body{
+height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+overflow:hidden;
+color:white;
+}
 
-    /* Label styling */
-    .label {
-      font-size: 0.6em;
-      color: #ffffff;
-      margin-top: 8px;
-      opacity: 0.8;
-    }
+/* VIDEO BACKGROUND */
 
-    /* Animation */
-    .time-block span {
-      transition: all 0.5s ease;
-      transform: scale(1);
-      opacity: 1;
-      display: block;
-    }
+video{
+position:fixed;
+top:0;
+left:0;
+min-width:100%;
+min-height:100%;
+z-index:-2;
+object-fit:cover;
+}
 
-    .time-block.updated span {
-      transform: scale(1.3);
-      opacity: 0.8;
-    }
-  </style>
+.overlay{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.5);
+z-index:-1;
+}
+
+/* CONTAINER */
+
+.container{
+
+text-align:center;
+
+background:rgba(0,0,0,0.65);
+
+padding:40px;
+
+border-radius:15px;
+
+backdrop-filter:blur(8px);
+
+box-shadow:0 10px 30px rgba(0,0,0,0.5);
+
+}
+
+h1{
+
+font-size:2.5em;
+
+margin-bottom:30px;
+
+}
+
+/* COUNTDOWN */
+
+.countdown{
+
+display:flex;
+
+gap:20px;
+
+justify-content:center;
+
+flex-wrap:wrap;
+
+}
+
+.block{
+
+width:120px;
+
+height:120px;
+
+background:linear-gradient(135deg,#ff5f6d,#ffc371);
+
+border-radius:15px;
+
+display:flex;
+
+flex-direction:column;
+
+justify-content:center;
+
+align-items:center;
+
+font-size:2.5em;
+
+font-weight:bold;
+
+box-shadow:0 5px 20px rgba(0,0,0,0.4);
+
+}
+
+.label{
+
+font-size:0.5em;
+
+margin-top:5px;
+
+}
+
+/* PLANE */
+
+.plane{
+
+position:fixed;
+
+top:20%;
+
+left:-200px;
+
+font-size:40px;
+
+animation:fly 15s linear infinite;
+
+}
+
+@keyframes fly{
+
+0%{left:-200px;}
+
+100%{left:120%;}
+
+}
+
+/* FIREWORK */
+
+canvas{
+
+position:fixed;
+
+top:0;
+
+left:0;
+
+pointer-events:none;
+
+}
+
+@media(max-width:600px){
+
+.block{
+
+width:80px;
+
+height:80px;
+
+font-size:1.8em;
+
+}
+
+h1{
+
+font-size:1.8em;
+
+}
+
+}
+
+</style>
+
 </head>
+
 <body>
-  <div class="countdown-container">
-    <h1>Countdown to Huế - Đà Nẵng Trip</h1>
-    <div class="countdown">
-      <div class="time-block"><span id="days">0</span><div class="label">Days</div></div>
-      <div class="time-block"><span id="hours">0</span><div class="label">Hours</div></div>
-      <div class="time-block"><span id="minutes">0</span><div class="label">Minutes</div></div>
-      <div class="time-block"><span id="seconds">0</span><div class="label">Seconds</div></div>
-    </div>
-  </div>
 
-  <script>
-    function countdown() {
-      const targetDate = new Date("2025-04-24T03:00:00").getTime();
-      const now = new Date().getTime();
-      const difference = targetDate - now;
+<video autoplay muted loop>
 
-      const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+<source src="https://cdn.coverr.co/videos/coverr-beach-waves-1572/1080p.mp4" type="video/mp4">
 
-      updateElement("days", days);
-      updateElement("hours", hours);
-      updateElement("minutes", minutes);
-      updateElement("seconds", seconds);
+</video>
 
-      if (difference < 0) {
-        clearInterval(timer);
-        document.querySelector(".countdown").innerHTML = "Enjoy your trip to Huế - Đà Nẵng!";
-      }
-    }
+<div class="overlay"></div>
 
-    function updateElement(id, newValue) {
-      const element = document.getElementById(id);
-      if (element.innerText != newValue) {
-        element.innerText = newValue;
-        element.parentElement.classList.add("updated");
-        
-        setTimeout(() => {
-          element.parentElement.classList.remove("updated");
-        }, 500);
-      }
-    }
+<div class="plane">✈️</div>
 
-    // Update every second
-    const timer = setInterval(countdown, 1000);
-  </script>
+<div class="container">
+
+<h1>Countdown to Nha Trang Trip 🌴</h1>
+
+<div class="countdown">
+
+<div class="block">
+<span id="days">0</span>
+<div class="label">Days</div>
+</div>
+
+<div class="block">
+<span id="hours">0</span>
+<div class="label">Hours</div>
+</div>
+
+<div class="block">
+<span id="minutes">0</span>
+<div class="label">Minutes</div>
+</div>
+
+<div class="block">
+<span id="seconds">0</span>
+<div class="label">Seconds</div>
+</div>
+
+</div>
+
+</div>
+
+<canvas id="fireworks"></canvas>
+
+<script>
+
+const targetDate = new Date("2026-04-09T00:00:00+07:00").getTime();
+
+function countdown(){
+
+const now = new Date().getTime();
+
+const diff = targetDate - now;
+
+const days = Math.floor(diff/(1000*60*60*24));
+
+const hours = Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+
+const minutes = Math.floor((diff%(1000*60*60))/(1000*60));
+
+const seconds = Math.floor((diff%(1000*60))/1000);
+
+document.getElementById("days").innerText=days;
+document.getElementById("hours").innerText=hours;
+document.getElementById("minutes").innerText=minutes;
+document.getElementById("seconds").innerText=seconds;
+
+if(diff<0){
+
+clearInterval(timer);
+
+document.querySelector(".container").innerHTML =
+"<h1>Enjoy your Nha Trang Trip 🌴✈️</h1>";
+
+startFireworks();
+
+}
+
+}
+
+const timer=setInterval(countdown,1000);
+
+countdown();
+
+/* FIREWORKS */
+
+function startFireworks(){
+
+const canvas=document.getElementById("fireworks");
+
+const ctx=canvas.getContext("2d");
+
+canvas.width=window.innerWidth;
+
+canvas.height=window.innerHeight;
+
+let particles=[];
+
+function createFirework(){
+
+let x=Math.random()*canvas.width;
+
+let y=Math.random()*canvas.height/2;
+
+for(let i=0;i<80;i++){
+
+particles.push({
+
+x:x,
+
+y:y,
+
+vx:(Math.random()-0.5)*6,
+
+vy:(Math.random()-0.5)*6,
+
+life:100
+
+});
+
+}
+
+}
+
+function update(){
+
+ctx.fillStyle="rgba(0,0,0,0.2)";
+
+ctx.fillRect(0,0,canvas.width,canvas.height);
+
+particles.forEach((p,i)=>{
+
+p.x+=p.vx;
+
+p.y+=p.vy;
+
+p.life--;
+
+ctx.fillStyle="hsl("+Math.random()*360+",100%,50%)";
+
+ctx.fillRect(p.x,p.y,3,3);
+
+if(p.life<=0)particles.splice(i,1);
+
+});
+
+requestAnimationFrame(update);
+
+}
+
+setInterval(createFirework,800);
+
+update();
+
+}
+
+</script>
+
 </body>
+
 </html>
